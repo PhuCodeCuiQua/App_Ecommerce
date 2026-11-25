@@ -65,6 +65,15 @@
         <activity
             android:name=".OrdersActivity"
             android:exported="false" />
+        <activity
+            android:name=".ViewHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WalletActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

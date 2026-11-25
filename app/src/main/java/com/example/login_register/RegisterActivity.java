@@ -1,6 +1,7 @@
 package com.example.login_register;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText edtPassword;
     private EditText edtConfirm;
     private Button btnRegister;
+    private View layoutBackToLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +38,22 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    // Lấy các view nhập liệu và nút đăng ký.
+    // Lấy các view nhập liệu, nút đăng ký và dòng quay lại đăng nhập.
     private void initViews() {
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         edtConfirm = findViewById(R.id.edtConfirm);
         btnRegister = findViewById(R.id.btnRegister);
+        layoutBackToLogin = findViewById(R.id.layoutBackToLogin);
     }
 
-    // Gắn sự kiện xử lý đăng ký.
+    // Gắn sự kiện xử lý đăng ký và quay lại.
     private void setupListeners() {
         btnRegister.setOnClickListener(v -> {
             handleRegister();
+        });
+        layoutBackToLogin.setOnClickListener(v -> {
+            finish();
         });
     }
 

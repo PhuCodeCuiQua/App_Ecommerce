@@ -88,6 +88,7 @@ public class DetailActivity extends AppCompatActivity {
         if (!loadProduct()) {
             return;
         }
+        recordViewed();
         setupImages();
         setupColorSelector();
         setupSizeChips();
@@ -196,6 +197,11 @@ public class DetailActivity extends AppCompatActivity {
         }
         selectedSize = product.getSizes().isEmpty() ? 0 : product.getSizes().get(0);
         return true;
+    }
+    private void recordViewed() {
+        ProfileDBHelper profileDb = new ProfileDBHelper(this);
+        profileDb.addViewed(SharePreferance.getUserKey(), product);
+        profileDb.close();
     }
 
     private void setupImages() {
