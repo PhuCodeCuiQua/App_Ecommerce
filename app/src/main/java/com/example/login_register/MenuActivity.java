@@ -46,6 +46,12 @@ public class MenuActivity extends AppCompatActivity {
         setupMenuItems();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showUsername();
+    }
+
     private void initViews() {
         main = findViewById(R.id.main);
         header = findViewById(R.id.menuHeader);
@@ -79,10 +85,14 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void setupProfile() {
-        String username = SharePreferance.username;
-        tvUsername.setText(username == null ? "" : username);
+        showUsername();
         btnEditProfile.setOnClickListener(view ->
                 startActivity(new Intent(this, UserActivity.class)));
+    }
+
+    private void showUsername() {
+        String username = SharePreferance.username;
+        tvUsername.setText(username == null ? "" : username);
     }
 
     private void setupBackButton() {
@@ -91,8 +101,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private void setupMenuItems() {
         addMenuRow("Đơn hàng của tôi", R.drawable.ic_history, OrdersActivity.class, null);
-        addMenuRow("Thẻ và ví", R.drawable.ic_wallet, null, null);
-        addMenuRow("Địa chỉ", R.drawable.ic_location, null, null);
+        addMenuRow("Thẻ và ví", R.drawable.ic_wallet, WalletActivity.class, null);
+        addMenuRow("Địa chỉ", R.drawable.ic_location, AddressActivity.class, null);
         addNotificationRow();
         addMenuRow("Yêu thích", R.drawable.ic_favorite_border,
                 FavoriteActivity.class, null);
@@ -189,6 +199,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void logout() {
         SharePreferance.username = null;
+        SharePreferance.save(this); // xóa tài khoản đã lưu để lần mở app sau không tự đăng nhập lại
         CartManager.clearMemory();
         FavoriteManager.clearMemory();
         Intent intent = new Intent(this, com.example.login_register.ui.login.LoginActivity.class);

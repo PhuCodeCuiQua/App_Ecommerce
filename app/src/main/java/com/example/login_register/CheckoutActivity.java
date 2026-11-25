@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.text.InputType;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,12 +23,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 public class CheckoutActivity extends AppCompatActivity {
     private static final double STANDARD_SHIPPING = 30000;
@@ -66,6 +63,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private int selectedShipping;
     private int selectedPayment;
     private Voucher selectedVoucher = Voucher.NONE;
+    private ProfileDBHelper profileDb;
+    private long selectedAddressId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,9 +219,11 @@ public class CheckoutActivity extends AppCompatActivity {
                 ? "Chọn voucher" : selectedVoucher.getName());
     }
 
+    // ---------- Địa chỉ giao hàng (lấy từ mục Địa chỉ trong hồ sơ) ----------
     private void setupAddress() {
-        renderAddress();
-        findViewById(R.id.btnChangeAddress).setOnClickListener(view -> showAddressDialog());
+        profileDb = new ProfileDBHelper(this);
+        syncAddressFromDb();
+        findViewById(R.id.btnChangeAddress).setOnClickListener(view -> showAddressPicker());
     }
 
     private void renderAddress() {
@@ -230,33 +231,56 @@ public class CheckoutActivity extends AppCompatActivity {
         tvAddress.setText(address.isEmpty() ? "Chưa có địa chỉ giao hàng" : address);
     }
 
-    private void showAddressDialog() {
-        TextInputLayout inputLayout = new TextInputLayout(this);
-        inputLayout.setBoxBackgroundMode(TextInputLayout.BOX_BACKGROUND_OUTLINE);
-        inputLayout.setHint("Địa chỉ giao hàng");
-        inputLayout.setBoxCornerRadii(dimen(R.dimen.field_radius), dimen(R.dimen.field_radius),
-                dimen(R.dimen.field_radius), dimen(R.dimen.field_radius));
-        TextInputEditText input = new TextInputEditText(inputLayout.getContext());
-        input.setMinLines(3);
-        input.setMaxLines(5);
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE
-                | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-        input.setGravity(Gravity.TOP | Gravity.START);
-        input.setText(CheckoutState.address);
-        inputLayout.addView(input);
-        inputLayout.setPadding(dimen(R.dimen.space_8), dimen(R.dimen.space_8),
-                dimen(R.dimen.space_8), 0);
+    private String formatAddress(Address a) {
+        return a.name + " · " + a.phone + "\n" + a.detail;
+    }
+
+    // Giữ địa chỉ đang chọn; nếu không còn thì lấy địa chỉ mặc định
+    private void syncAddressFromDb() {
+        ArrayList<Address> list = profileDb.getAddresses(SharePreferance.getUserKey());
+        Address chosen = null;
+        for (Address a : list) {
+            if (a.id == selectedAddressId) {
+                chosen = a;
+                break;
+            }
+        }
+        if (chosen == null && !list.isEmpty()) {
+            chosen = list.get(0); // danh sách đã xếp địa chỉ mặc định lên đầu
+        }
+        if (chosen != null) {
+            selectedAddressId = chosen.id;
+            CheckoutState.address = formatAddress(chosen);
+        } else {
+            selectedAddressId = 0;
+            CheckoutState.address = "";
+        }
+        renderAddress();
+    }
+
+    private void showAddressPicker() {
+        ArrayList<Address> list = profileDb.getAddresses(SharePreferance.getUserKey());
+        if (list.isEmpty()) {
+            startActivity(new Intent(this, AddressActivity.class));
+            return;
+        }
+        CharSequence[] labels = new CharSequence[list.size() + 1];
+        for (int i = 0; i < list.size(); i++) {
+            labels[i] = formatAddress(list.get(i));
+        }
+        labels[list.size()] = "+ Thêm hoặc sửa địa chỉ";
 
         new MaterialAlertDialogBuilder(this)
-                .setTitle("Địa chỉ giao hàng")
-                .setView(inputLayout)
-                .setNegativeButton("Hủy", null)
-                .setPositiveButton("Lưu", (dialog, which) -> {
-                    CheckoutState.address = input.getText() == null
-                            ? "" : input.getText().toString().trim();
-                    renderAddress();
-                    recalcTotals();
+                .setTitle("Chọn địa chỉ giao hàng")
+                .setItems(labels, (dialog, which) -> {
+                    if (which == list.size()) {
+                        startActivity(new Intent(this, AddressActivity.class));
+                    } else {
+                        selectedAddressId = list.get(which).id;
+                        syncAddressFromDb();
+                    }
                 })
+                .setNegativeButton("Đóng", null)
                 .show();
     }
 
@@ -409,7 +433,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     ? "" : CheckoutState.address.trim();
             if (address.isEmpty()) {
                 Snackbar.make(findViewById(R.id.main),
-                        "Vui lòng nhập địa chỉ giao hàng", Snackbar.LENGTH_LONG).show();
+                        "Vui lòng chọn địa chỉ giao hàng", Snackbar.LENGTH_LONG).show();
                 return;
             }
             btnPay.setEnabled(false);
@@ -493,7 +517,13 @@ public class CheckoutActivity extends AppCompatActivity {
             renderCheckoutItems();
             renderPriceProducts();
             recalcTotals();
-            renderAddress();
+            syncAddressFromDb();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (profileDb != null) profileDb.close();
+        super.onDestroy();
     }
 }
