@@ -27,7 +27,7 @@
                 android:layout_height="@dimen/icon_size"
                 android:layout_gravity="center"
                 android:contentDescription="Loại thông báo"
-                android:tint="@color/tile_text" />
+                app:tint="@color/tile_text" />
         </FrameLayout>
 
         <LinearLayout

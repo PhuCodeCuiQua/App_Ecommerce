@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/topbarHome"
     android:layout_width="match_parent"
     android:layout_height="@dimen/home_topbar_height"
@@ -16,7 +17,7 @@
         android:padding="@dimen/home_header_icon_padding"
         android:scaleType="fitXY"
         android:src="@drawable/ic_search"
-        android:tint="?attr/colorOnSurface" />
+        app:tint="?attr/colorOnSurface" />
 
     <ImageView
         android:id="@+id/imgLogo"
@@ -49,7 +50,7 @@
                 android:padding="@dimen/home_header_icon_padding"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_cart"
-                android:tint="?attr/colorOnSurface" />
+                app:tint="?attr/colorOnSurface" />
 
             <TextView
                 android:id="@+id/tvCartBadge"

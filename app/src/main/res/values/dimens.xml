@@ -1,8 +1,5 @@
 <resources>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="screen_margin">16dp</dimen>
-    <dimen name="card_spacing">12dp</dimen>
     <dimen name="card_padding">16dp</dimen>
     <dimen name="space_2">2dp</dimen>
     <dimen name="space_4">4dp</dimen>
@@ -12,19 +9,16 @@
     <dimen name="space_12">12dp</dimen>
     <dimen name="space_16">16dp</dimen>
     <dimen name="space_24">24dp</dimen>
-    <dimen name="space_32">32dp</dimen>
     <dimen name="radius_small">12dp</dimen>
     <dimen name="radius_medium">24dp</dimen>
     <dimen name="radius_large">32dp</dimen>
     <dimen name="bottom_panel_radius">28dp</dimen>
     <dimen name="radius_primary_button">16dp</dimen>
     <dimen name="radius_pill">28dp</dimen>
-    <dimen name="radius_header">24dp</dimen>
     <dimen name="radius_auth_header">32dp</dimen>
     <dimen name="field_radius">14dp</dimen>
     <dimen name="card_stroke_width">1dp</dimen>
     <dimen name="card_elevation">1dp</dimen>
-    <dimen name="footer_elevation">3dp</dimen>
     <dimen name="sticky_bar_elevation">8dp</dimen>
     <dimen name="touch_target">48dp</dimen>
     <dimen name="button_height">52dp</dimen>
@@ -37,8 +31,6 @@
     <dimen name="footer_icon_size">26dp</dimen>
     <dimen name="bottom_nav_elevation">16dp</dimen>
     <dimen name="nav_label_text_size">12sp</dimen>
-    <dimen name="nav_badge_text_size">10sp</dimen>
-    <dimen name="nav_badge_size">18dp</dimen>
     <dimen name="nav_dot_size">8dp</dimen>
     <dimen name="nav_badge_offset">8dp</dimen>
     <dimen name="nav_badge_elevation">16dp</dimen>
@@ -46,15 +38,11 @@
     <dimen name="notification_card_radius">20dp</dimen>
     <dimen name="product_image_size">96dp</dimen>
     <dimen name="cart_image_size">72dp</dimen>
-    <dimen name="detail_image_height">260dp</dimen>
     <dimen name="avatar_size">104dp</dimen>
     <dimen name="review_avatar_size">40dp</dimen>
-    <dimen name="quantity_button_size">36dp</dimen>
     <dimen name="quantity_text_width">32dp</dimen>
     <dimen name="user_action_height">56dp</dimen>
-    <dimen name="info_label_width">110dp</dimen>
     <dimen name="home_topbar_height">56dp</dimen>
-    <dimen name="home_logo_size">40dp</dimen>
     <dimen name="home_logo_height">34dp</dimen>
     <dimen name="home_header_icon_padding">11dp</dimen>
     <dimen name="home_logo_max_width">112dp</dimen>
@@ -72,9 +60,6 @@
     <dimen name="order_status_min_height">28dp</dimen>
     <dimen name="product_card_width">168dp</dimen>
     <dimen name="home_section_title_height">40dp</dimen>
-    <dimen name="product_card_price_min_text_size">11sp</dimen>
-    <dimen name="product_card_price_max_text_size">16sp</dimen>
-    <dimen name="quick_add_size">40dp</dimen>
     <dimen name="search_avatar_size">48dp</dimen>
     <dimen name="menu_avatar_size">72dp</dimen>
     <dimen name="menu_item_height">56dp</dimen>
@@ -86,7 +71,6 @@
     <dimen name="detail_color_height">52dp</dimen>
     <dimen name="detail_color_radius">26dp</dimen>
     <dimen name="detail_dot_size">8dp</dimen>
-    <dimen name="detail_star_size">18dp</dimen>
     <dimen name="detail_float_size">44dp</dimen>
     <dimen name="detail_sticky_padding">16dp</dimen>
     <dimen name="detail_buy_button_height">64dp</dimen>
@@ -113,7 +97,6 @@
     <dimen name="product_tag_text_size">11sp</dimen>
     <dimen name="product_tag_icon_size">14dp</dimen>
     <dimen name="product_overlay_margin">10dp</dimen>
-    <dimen name="product_favorite_visual_size">36dp</dimen>
     <dimen name="product_favorite_inset">7dp</dimen>
     <dimen name="product_overlay_elevation">4dp</dimen>
     <dimen name="product_discount_min_width">40dp</dimen>
@@ -124,11 +107,9 @@
     <dimen name="product_original_price_min_text_size">10sp</dimen>
     <dimen name="product_discount_text_size">11sp</dimen>
     <dimen name="product_add_visual_size">40dp</dimen>
-    <dimen name="product_grid_spacing">12dp</dimen>
     <dimen name="section_spacing">24dp</dimen>
     <dimen name="section_accent_width">4dp</dimen>
     <dimen name="section_accent_height">24dp</dimen>
-    <dimen name="section_button_height">36dp</dimen>
     <dimen name="section_button_text_size">12sp</dimen>
     <dimen name="home_banner_top_margin">8dp</dimen>
     <dimen name="banner_dot_margin_bottom">12dp</dimen>

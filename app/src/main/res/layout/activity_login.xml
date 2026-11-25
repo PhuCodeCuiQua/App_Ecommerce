@@ -23,7 +23,7 @@
             android:layout_height="56dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_cart"
-            android:tint="?attr/colorOnPrimary" />
+            app:tint="?attr/colorOnPrimary" />
 
         <TextView
             android:id="@+id/tvLoginTitle"

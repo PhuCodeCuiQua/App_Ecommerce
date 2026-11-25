@@ -15,10 +15,6 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/radius_small</item>
     </style>
-    <style name="ShapeAppearanceOverlay.DetailImage" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/radius_header</item>
-    </style>
     <style name="ShapeAppearanceOverlay.Avatar" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>

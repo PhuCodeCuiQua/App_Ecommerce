@@ -17,7 +17,6 @@
     <color name="md_onErrorContainer">#410E0B</color>
     <color name="md_background">#FFFFFF</color>
     <color name="background">@color/md_background</color>
-    <color name="md_onBackground">#111111</color>
     <color name="md_surface">#FFFFFF</color>
     <color name="surface">@color/md_surface</color>
     <color name="md_onSurface">#111111</color>
@@ -44,11 +43,9 @@
     <color name="chip_size_background_unselected">#F2F3F5</color>
     <color name="panel_surface">#232327</color>
     <color name="panel_text_secondary">#B8B8BE</color>
-    <color name="avatar_background">#E3E4E7</color>
     <color name="product_tile">#F2F3F5</color>
     <color name="tile_text">#111111</color>
     <color name="tile_text_secondary">#6B7280</color>
-    <color name="product_tile_secondary">#6B7280</color>
     <color name="chip_bg">#EFEFF1</color>
     <color name="banner_gradient_start">#0F0F10</color>
     <color name="banner_gradient_end">#2B2B2F</color>

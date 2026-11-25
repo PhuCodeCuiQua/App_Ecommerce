@@ -68,7 +68,7 @@
                 android:focusable="false"
                 android:padding="@dimen/space_12"
                 android:src="@drawable/ic_favorite_border"
-                android:tint="@color/tile_text_secondary"
+                app:tint="@color/tile_text_secondary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -176,7 +176,7 @@
                         android:background="@drawable/bg_product_add_circle"
                         android:padding="@dimen/space_8"
                         android:src="@drawable/ic_cart"
-                        android:tint="@color/white" />
+                        app:tint="@color/white" />
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>

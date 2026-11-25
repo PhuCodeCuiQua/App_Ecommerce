@@ -65,7 +65,7 @@
                         android:layout_height="@dimen/icon_size"
                         android:layout_marginEnd="@dimen/space_12"
                         android:src="@drawable/ic_discount"
-                        android:tint="?attr/colorOnSurfaceVariant" />
+                        app:tint="?attr/colorOnSurfaceVariant" />
 
                     <TextView
                         android:id="@+id/tvVoucher"
@@ -80,7 +80,7 @@
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
                         android:src="@drawable/ic_chevron_right"
-                        android:tint="?attr/colorOnSurfaceVariant" />
+                        app:tint="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

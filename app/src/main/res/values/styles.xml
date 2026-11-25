@@ -70,16 +70,6 @@
         <item name="boxCornerRadiusBottomEnd">@dimen/field_radius</item>
     </style>
 
-    <style name="Widget.App.SearchField" parent="Widget.Material3.TextInputLayout.FilledBox">
-        <item name="boxCornerRadiusTopStart">@dimen/radius_large</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/radius_large</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/radius_large</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/radius_large</item>
-        <item name="boxBackgroundColor">?attr/colorSurfaceVariant</item>
-        <item name="boxStrokeWidth">0dp</item>
-        <item name="boxStrokeWidthFocused">0dp</item>
-    </style>
-
     <style name="Widget.App.SearchField.Dark" parent="Widget.Material3.TextInputLayout.FilledBox">
         <item name="boxCornerRadiusTopStart">@dimen/field_radius</item>
         <item name="boxCornerRadiusTopEnd">@dimen/field_radius</item>
@@ -90,15 +80,6 @@
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="hintTextColor">@color/panel_text_secondary</item>
         <item name="startIconTint">@color/white</item>
-    </style>
-
-    <style name="TextAppearance.App.FooterLabel" parent="TextAppearance.Material3.LabelMedium">
-        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
-    </style>
-
-    <style name="ShapeAppearanceOverlay.FooterIcon" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
     </style>
 
     <style name="Widget.App.BottomNav" parent="" />
@@ -133,19 +114,6 @@
         <item name="android:textSize">@dimen/nav_label_text_size</item>
         <item name="android:textColor">@color/nav_icon_tint</item>
         <item name="android:maxLines">1</item>
-    </style>
-
-    <style name="Widget.App.BottomNav.Badge" parent="TextAppearance.Material3.LabelSmall">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/nav_badge_size</item>
-        <item name="android:minWidth">@dimen/nav_badge_size</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingStart">@dimen/space_4</item>
-        <item name="android:paddingEnd">@dimen/space_4</item>
-        <item name="android:background">@drawable/bg_nav_badge</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/nav_badge_text_size</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextAppearance.App.Checkout.TitleSmall"
