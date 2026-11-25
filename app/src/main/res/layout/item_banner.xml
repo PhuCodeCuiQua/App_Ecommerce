@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_banner_dark"
+    android:clipChildren="true"
+    android:clipToPadding="true"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_banner_panel" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bannerShoeGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.40" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bannerTextGuide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.56" />
+
+        <ImageView
+            android:id="@+id/imgBannerShoe"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/banner_image_margin_end"
+            android:contentDescription="Giày trong chương trình"
+            android:rotation="-6"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/bannerShoeGuide"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.60" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/banner_padding"
+            android:paddingTop="@dimen/banner_vertical_padding"
+            android:paddingEnd="@dimen/space_8"
+            android:paddingBottom="@dimen/banner_vertical_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/bannerTextGuide"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBannerTagline"
+                    style="@style/TextAppearance.App.Banner.Tagline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="@dimen/space_16"
+                    android:layout_height="@dimen/card_stroke_width"
+                    android:layout_marginStart="@dimen/space_8"
+                    android:background="@color/banner_tagline" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvBannerTitle"
+                style="@style/TextAppearance.App.Banner.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_4"
+                android:autoSizeMaxTextSize="@dimen/banner_title_size"
+                android:autoSizeMinTextSize="@dimen/banner_title_min_size"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/tvBannerSubtitle"
+                style="@style/TextAppearance.App.Banner.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_2"
+                android:maxLines="2" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBannerCta"
+                style="@style/Widget.App.Button.Pill"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/banner_cta_height"
+                android:layout_marginTop="@dimen/space_4"
+                android:minWidth="@dimen/touch_target"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/white" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

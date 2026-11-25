@@ -48,6 +48,15 @@ public final class ProductMapper {
         Number ratingAverage = document.getDouble("ratingAverage");
         Number ratingCount = document.getLong("ratingCount");
         Number soldCount = document.getLong("soldCount");
+        List<String> tags = new ArrayList<>();
+        Object tagData = document.get("tags");
+        if (tagData instanceof List<?>) {
+            for (Object tag : (List<?>) tagData) {
+                if (tag instanceof String) {
+                    tags.add((String) tag);
+                }
+            }
+        }
 
         return new Product(document.getId(), valueOr(document.getString("name"), ""),
                 valueOr(document.getString("type"), ""),
@@ -61,7 +70,7 @@ public final class ProductMapper {
                 valueOr(document.getString("features"), ""),
                 sizes, colors, ratingAverage == null ? 0 : ratingAverage.doubleValue(),
                 ratingCount == null ? 0 : ratingCount.intValue(),
-                soldCount == null ? 0 : soldCount.intValue());
+                soldCount == null ? 0 : soldCount.intValue(), tags);
     }
 
     private static int resolveImage(Context context, String imageName) {

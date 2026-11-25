@@ -7,14 +7,15 @@
     android:paddingEnd="@dimen/space_8">
 
     <ImageButton
-        android:id="@+id/btnMenu"
+        android:id="@+id/btnSearch"
         android:layout_width="@dimen/touch_target"
         android:layout_height="@dimen/touch_target"
         android:layout_gravity="start|center_vertical"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Mở menu hồ sơ"
-        android:padding="@dimen/space_12"
-        android:src="@drawable/ic_menu"
+        android:contentDescription="Tìm kiếm và lọc sản phẩm"
+        android:padding="@dimen/home_header_icon_padding"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_search"
         android:tint="?attr/colorOnSurface" />
 
     <ImageView
@@ -35,16 +36,6 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btnSearch"
-            android:layout_width="@dimen/touch_target"
-            android:layout_height="@dimen/touch_target"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Tìm kiếm và lọc sản phẩm"
-            android:padding="@dimen/space_12"
-            android:src="@drawable/ic_search"
-            android:tint="?attr/colorOnSurface" />
-
         <FrameLayout
             android:layout_width="@dimen/touch_target"
             android:layout_height="@dimen/touch_target">
@@ -55,7 +46,8 @@
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Mở giỏ hàng"
-                android:padding="@dimen/space_12"
+                android:padding="@dimen/home_header_icon_padding"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_cart"
                 android:tint="?attr/colorOnSurface" />
 
@@ -66,12 +58,16 @@
                 android:layout_height="@dimen/cart_badge_size"
                 android:layout_gravity="end|top"
                 android:background="@drawable/bg_cart_badge"
+                android:elevation="@dimen/detail_cart_badge_elevation"
                 android:gravity="center"
                 android:minWidth="@dimen/cart_badge_size"
+                android:minHeight="@dimen/cart_badge_size"
                 android:paddingStart="@dimen/space_2"
                 android:paddingEnd="@dimen/space_2"
                 android:visibility="gone"
-                android:textColor="@color/black" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/cart_badge_text_size"
+                android:textStyle="bold" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

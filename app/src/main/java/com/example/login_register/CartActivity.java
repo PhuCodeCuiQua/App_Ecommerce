@@ -58,6 +58,9 @@ public class CartActivity extends AppCompatActivity {
                 WindowCompat.getInsetsController(getWindow(), findViewById(R.id.main));
         controller.setAppearanceLightStatusBars(true);
         controller.setAppearanceLightNavigationBars(false);
+        bottomBar.addOnLayoutChangeListener((view, left, top, right, bottom,
+                                             oldLeft, oldTop, oldRight, oldBottom) ->
+                updateListBottomPadding());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (view, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             view.setPadding(systemBars.left, 0, systemBars.right, 0);
@@ -67,6 +70,15 @@ public class CartActivity extends AppCompatActivity {
                     bottomBar.getPaddingRight(), bottomBarBasePadding + systemBars.bottom);
             return insets;
         });
+    }
+
+    private void updateListBottomPadding() {
+        int bottomPadding = bottomBar.getVisibility() == View.VISIBLE
+                ? bottomBar.getHeight() : 0;
+        if (listView.getPaddingBottom() != bottomPadding) {
+            listView.setPadding(listView.getPaddingLeft(), listView.getPaddingTop(),
+                    listView.getPaddingRight(), bottomPadding);
+        }
     }
 
     private void setupTopbar() {
@@ -94,6 +106,7 @@ public class CartActivity extends AppCompatActivity {
         listView.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
         tvEmpty.setVisibility(isEmpty ? View.VISIBLE : View.GONE);
         bottomBar.setVisibility(isEmpty ? View.GONE : View.VISIBLE);
+        updateListBottomPadding();
         btnPlaceOrder.setEnabled(!isEmpty);
         tvTotal.setText(PriceFormatter.format(CartManager.getTotal()));
     }

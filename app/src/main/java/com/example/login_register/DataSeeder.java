@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
 
 import java.util.ArrayList;
@@ -59,15 +60,87 @@ public final class DataSeeder {
         db.collection("meta").document("seed_v2").get()
                 .addOnSuccessListener(document -> {
                     if (document.exists()) {
-                        onDone.run();
+                        seedV3IfNeeded(db, onDone);
                     } else {
-                        seed(db, onDone);
+                        seed(db, () -> seedV3IfNeeded(db, onDone));
                     }
                 })
                 .addOnFailureListener(exception -> {
                     Log.e(TAG, "Không thể kiểm tra dữ liệu khởi tạo", exception);
+                    seedV3IfNeeded(db, onDone);
+                });
+    }
+
+    private static void seedV3IfNeeded(FirebaseFirestore db, Runnable onDone) {
+        db.collection("meta").document("seed_v3").get()
+                .addOnSuccessListener(document -> {
+                    if (document.exists()) {
+                        onDone.run();
+                    } else {
+                        seedV3(db, onDone);
+                    }
+                })
+                .addOnFailureListener(exception -> {
+                    Log.e(TAG, "Không thể kiểm tra dữ liệu khởi tạo v3", exception);
                     onDone.run();
                 });
+    }
+
+    private static void seedV3(FirebaseFirestore db, Runnable onDone) {
+        String[][] productTags = {
+                {"aero_max", "bestseller"},
+                {"aero_zoom", "flashsale", "bestseller"},
+                {"aero_edge", "new"},
+                {"urban_classic", "new"},
+                {"glide_lady", "flashsale"},
+                {"breeze", "bestseller"},
+                {"flex_slide", "new"},
+                {"spark_kids"}
+        };
+        WriteBatch batch = db.batch();
+        for (String[] product : productTags) {
+            List<String> tags = new ArrayList<>();
+            for (int index = 1; index < product.length; index++) {
+                tags.add(product[index]);
+            }
+            Map<String, Object> tagData = new HashMap<>();
+            tagData.put("tags", tags);
+            batch.set(db.collection("products").document(product[0]), tagData,
+                    SetOptions.merge());
+        }
+
+        addBanner(batch, db, "banner1", "NEW ARRIVAL", "Aero Max", "Max",
+                "Bước nhẹ hơn.\nChạy xa hơn.", "Mua ngay", "aero_max", 1);
+        addBanner(batch, db, "banner2", "FLASH SALE", "Glide Lady", "Lady",
+                "Giảm đến 25%.\nChạy thật phong cách.", "Xem ngay", "glide_lady", 2);
+        addBanner(batch, db, "banner3", "MÙA HÈ", "Breeze", "Breeze",
+                "Nhẹ chân.\nMát cả ngày dài.", "Khám phá", "breeze", 3);
+
+        Map<String, Object> marker = new HashMap<>();
+        marker.put("seededAt", Timestamp.now());
+        batch.set(db.collection("meta").document("seed_v3"), marker);
+        batch.commit()
+                .addOnSuccessListener(unused -> onDone.run())
+                .addOnFailureListener(exception -> {
+                    Log.e(TAG, "Không thể ghi dữ liệu khởi tạo v3", exception);
+                    onDone.run();
+                });
+    }
+
+    private static void addBanner(WriteBatch batch, FirebaseFirestore db, String id,
+                                  String tagline, String title, String accentWord,
+                                  String subtitle, String buttonText, String productId,
+                                  int order) {
+        Map<String, Object> banner = new HashMap<>();
+        banner.put("tagline", tagline);
+        banner.put("title", title);
+        banner.put("accentWord", accentWord);
+        banner.put("subtitle", subtitle);
+        banner.put("buttonText", buttonText);
+        banner.put("productId", productId);
+        banner.put("order", order);
+        banner.put("active", true);
+        batch.set(db.collection("banners").document(id), banner);
     }
 
     private static void seed(FirebaseFirestore db, Runnable onDone) {

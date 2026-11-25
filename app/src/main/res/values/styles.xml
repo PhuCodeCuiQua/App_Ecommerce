@@ -14,6 +14,12 @@
         <item name="strokeWidth">0dp</item>
     </style>
 
+    <style name="Widget.App.Card.Notification" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/notification_card_radius</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
     <style name="Widget.App.Button" parent="Widget.Material3.Button">
         <item name="android:minHeight">@dimen/button_height</item>
         <item name="cornerRadius">@dimen/radius_large</item>
@@ -95,10 +101,116 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="Widget.App.BottomNav" parent="" />
+
+    <style name="Widget.App.BottomNav.Item">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/footer_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Widget.App.BottomNav.Content">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="Widget.App.BottomNav.Icon">
+        <item name="android:layout_width">@dimen/footer_icon_size</item>
+        <item name="android:layout_height">@dimen/footer_icon_size</item>
+        <item name="android:tint">@color/nav_icon_tint</item>
+        <item name="android:contentDescription">@null</item>
+    </style>
+
+    <style name="Widget.App.BottomNav.Label" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/space_2</item>
+        <item name="android:textSize">@dimen/nav_label_text_size</item>
+        <item name="android:textColor">@color/nav_icon_tint</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Widget.App.BottomNav.Badge" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/nav_badge_size</item>
+        <item name="android:minWidth">@dimen/nav_badge_size</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">@dimen/space_4</item>
+        <item name="android:paddingEnd">@dimen/space_4</item>
+        <item name="android:background">@drawable/bg_nav_badge</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/nav_badge_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="TextAppearance.App.Checkout.TitleSmall"
         parent="TextAppearance.Material3.TitleSmall" />
     <style name="TextAppearance.App.Checkout.BodyMedium"
         parent="TextAppearance.Material3.BodyMedium" />
     <style name="TextAppearance.App.Checkout.BodySmall"
         parent="TextAppearance.Material3.BodySmall" />
+    <style name="TextAppearance.App.TitleLarge"
+        parent="TextAppearance.Material3.TitleLarge" />
+    <style name="TextAppearance.App.TitleMedium"
+        parent="TextAppearance.Material3.TitleMedium" />
+    <style name="TextAppearance.App.BodyLarge"
+        parent="TextAppearance.Material3.BodyLarge" />
+    <style name="TextAppearance.App.Banner.Tagline"
+        parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/banner_tagline_size</item>
+        <item name="android:textColor">@color/banner_tagline</item>
+        <item name="android:letterSpacing">0.15</item>
+    </style>
+    <style name="TextAppearance.App.Banner.Title"
+        parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">@dimen/banner_title_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+    <style name="TextAppearance.App.Banner.Subtitle"
+        parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/banner_subtitle_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+    <style name="TextAppearance.App.CategoryChip"
+        parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">@dimen/category_label_size</item>
+        <item name="android:textColor">@color/tile_text</item>
+    </style>
+    <style name="TextAppearance.App.ProductTag"
+        parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/product_tag_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.App.ProductName"
+        parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">@dimen/product_name_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.App.ProductDiscount"
+        parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/product_discount_text_size</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.App.ProductPrice"
+        parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textSize">@dimen/product_price_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.App.ProductOriginalPrice"
+        parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textSize">@dimen/product_original_price_text_size</item>
+        <item name="android:textColor">@color/tile_text</item>
+    </style>
+    <style name="TextAppearance.App.SectionButton"
+        parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">@dimen/section_button_text_size</item>
+    </style>
 </resources>

@@ -277,16 +277,19 @@
         android:elevation="@dimen/sticky_bar_elevation"
         android:orientation="vertical"
         android:paddingStart="@dimen/screen_margin"
-        android:paddingTop="@dimen/space_12"
+        android:paddingTop="@dimen/space_16"
         android:paddingEnd="@dimen/screen_margin"
-        android:paddingBottom="@dimen/space_8">
+        android:paddingBottom="@dimen/space_12">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_bottom_summary"
             android:orientation="vertical"
-            android:padding="@dimen/card_padding">
+            android:paddingStart="@dimen/total_card_horizontal_padding"
+            android:paddingTop="@dimen/total_card_vertical_padding"
+            android:paddingEnd="@dimen/total_card_horizontal_padding"
+            android:paddingBottom="@dimen/total_card_vertical_padding">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -299,15 +302,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Tổng cộng"
-                    android:textAppearance="?attr/textAppearanceTitleMedium"
-                    android:textColor="?attr/colorOnSurface" />
+                    android:textAppearance="?attr/textAppearanceBodyLarge"
+                    android:textColor="@color/tile_text_secondary" />
 
                 <TextView
                     android:id="@+id/tvGrandTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?attr/textAppearanceTitleLarge"
-                    android:textColor="?attr/colorOnSurface"
+                    android:textColor="@color/tile_text"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -316,9 +319,14 @@
             android:id="@+id/btnPay"
             style="@style/Widget.App.Button.Primary"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:textColor="@color/white"
+            android:layout_height="@dimen/bottom_action_button_height"
+            android:layout_marginTop="@dimen/space_12"
+            android:letterSpacing="0.08"
+            android:textColor="@color/black"
+            android:textSize="@dimen/bottom_action_text_size"
+            android:textStyle="bold"
             android:text="THANH TOÁN"
-            app:backgroundTint="@color/bottom_bar_black" />
+            app:backgroundTint="@color/white"
+            app:cornerRadius="@dimen/bottom_action_corner_radius" />
     </LinearLayout>
 </LinearLayout>

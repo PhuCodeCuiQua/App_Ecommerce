@@ -19,6 +19,7 @@
     <color name="background">@color/md_background</color>
     <color name="md_onBackground">#111111</color>
     <color name="md_surface">#FFFFFF</color>
+    <color name="surface">@color/md_surface</color>
     <color name="md_onSurface">#111111</color>
     <color name="md_surfaceVariant">#F2F3F5</color>
     <color name="md_onSurfaceVariant">#6B7280</color>
@@ -48,4 +49,16 @@
     <color name="tile_text">#111111</color>
     <color name="tile_text_secondary">#6B7280</color>
     <color name="product_tile_secondary">#6B7280</color>
+    <color name="chip_bg">#EFEFF1</color>
+    <color name="banner_gradient_start">#0F0F10</color>
+    <color name="banner_gradient_end">#2B2B2F</color>
+    <color name="banner_tagline">#B3FFFFFF</color>
+    <color name="tag_flashsale_background">#EDE7FF</color>
+    <color name="tag_flashsale_foreground">#5B2EE5</color>
+    <color name="tag_bestseller_background">#FDECEA</color>
+    <color name="tag_bestseller_foreground">#D32F2F</color>
+    <color name="tag_new_background">#E6F4EA</color>
+    <color name="tag_new_foreground">#1E7B34</color>
+    <color name="tag_white">#FFFFFF</color>
+    <color name="tag_unselected">#73FFFFFF</color>
 </resources>

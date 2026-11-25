@@ -4,16 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -86,7 +87,6 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
     final class ProductViewHolder extends RecyclerView.ViewHolder {
         private final View card;
         private final View cardContent;
-        private final FrameLayout imageContainer;
         private final RecyclerView recyclerView;
         private final ImageView image;
         private final TextView name;
@@ -94,6 +94,8 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
         private final TextView originalPrice;
         private final TextView salePrice;
         private final TextView discount;
+        private final View discountRow;
+        private final TextView tag;
         private final ImageButton favorite;
         private final View add;
 
@@ -102,28 +104,16 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
             this.recyclerView = recyclerView;
             card = itemView.findViewById(R.id.productCard);
             cardContent = itemView.findViewById(R.id.productCardContent);
-            imageContainer = itemView.findViewById(R.id.productImageContainer);
             image = itemView.findViewById(R.id.imgProduct);
             name = itemView.findViewById(R.id.tvProductName);
             type = itemView.findViewById(R.id.tvProductType);
             originalPrice = itemView.findViewById(R.id.tvOriginalPrice);
             salePrice = itemView.findViewById(R.id.tvSalePrice);
             discount = itemView.findViewById(R.id.tvDiscount);
+            discountRow = itemView.findViewById(R.id.productDiscountRow);
+            tag = itemView.findViewById(R.id.tvTag);
             favorite = itemView.findViewById(R.id.btnFavorite);
             add = itemView.findViewById(R.id.btnAdd);
-            imageContainer.addOnLayoutChangeListener((view, left, top, right, bottom,
-                                                      oldLeft, oldTop, oldRight, oldBottom) -> {
-                if (displayMode != DisplayMode.GRID || right <= left) {
-                    return;
-                }
-                android.widget.LinearLayout.LayoutParams params =
-                        (android.widget.LinearLayout.LayoutParams) imageContainer.getLayoutParams();
-                if (params.height != right - left || params.weight != 0f) {
-                    params.height = right - left;
-                    params.weight = 0f;
-                    imageContainer.setLayoutParams(params);
-                }
-            });
         }
 
         void bind(Product product) {
@@ -138,20 +128,18 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
             type.setText(product.getType());
             salePrice.setText(PriceFormatter.format(product.getSalePrice()));
             if (product.hasDiscount()) {
-                originalPrice.setVisibility(View.VISIBLE);
                 originalPrice.setText(PriceFormatter.format(product.getOriginalPrice()));
                 originalPrice.setPaintFlags(originalPrice.getPaintFlags()
                         | Paint.STRIKE_THRU_TEXT_FLAG);
-                discount.setVisibility(View.VISIBLE);
                 discount.setText("-" + product.getDiscountPercent() + "%");
+                discountRow.setVisibility(View.VISIBLE);
                 salePrice.setTextColor(ContextCompat.getColor(context, R.color.sale_red));
             } else {
-                originalPrice.setVisibility(View.GONE);
                 salePrice.setTextColor(ContextCompat.getColor(context, R.color.tile_text));
-                discount.setVisibility(View.GONE);
+                discountRow.setVisibility(View.GONE);
             }
 
-            favorite.setVisibility(showFavoriteButton ? View.VISIBLE : View.GONE);
+            bindTag(product.getPrimaryTag());
             updateFavoriteIcon(favorite, product);
             add.setVisibility(showFavoriteButton ? View.GONE : View.VISIBLE);
             favorite.setOnClickListener(v -> {
@@ -163,6 +151,9 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
                 } else {
                     FavoriteManager.toggle(product);
                     updateFavoriteIcon(favorite, product);
+                    if (onFavoriteChangedListener != null) {
+                        onFavoriteChangedListener.onFavoriteChanged(product);
+                    }
                 }
             });
 
@@ -184,7 +175,6 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
         private void updateLayout() {
             ViewGroup.LayoutParams cardParams = card.getLayoutParams();
             ViewGroup.LayoutParams contentParams = cardContent.getLayoutParams();
-            ViewGroup.LayoutParams imageParams = imageContainer.getLayoutParams();
             if (displayMode == DisplayMode.HORIZONTAL) {
                 int parentWidth = recyclerView.getWidth();
                 cardParams.width = parentWidth > 0
@@ -192,18 +182,13 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
                         : context.getResources().getDimensionPixelSize(R.dimen.product_card_width);
                 cardParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
                 contentParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                imageParams.height = 0;
-                ((android.widget.LinearLayout.LayoutParams) imageParams).weight = 1f;
             } else {
                 cardParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
                 cardParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 contentParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                imageParams.height = 0;
-                ((android.widget.LinearLayout.LayoutParams) imageParams).weight = 0f;
             }
             card.setLayoutParams(cardParams);
             cardContent.setLayoutParams(contentParams);
-            imageContainer.setLayoutParams(imageParams);
         }
 
         private void updateFavoriteIcon(ImageButton button, Product product) {
@@ -211,8 +196,53 @@ public class ProductCardAdapter extends RecyclerView.Adapter<ProductCardAdapter.
             button.setImageResource(isFavorite
                     ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
             int tint = ContextCompat.getColor(context,
-                    isFavorite ? R.color.sale_red : R.color.black);
+                    isFavorite ? R.color.sale_red : R.color.tile_text_secondary);
             button.setImageTintList(ColorStateList.valueOf(tint));
+        }
+
+        private void bindTag(String primaryTag) {
+            if (primaryTag == null) {
+                tag.setVisibility(View.GONE);
+                return;
+            }
+            int icon;
+            int background;
+            int foreground;
+            String label;
+            switch (primaryTag) {
+                case "flashsale":
+                    label = "Flash Sale";
+                    icon = R.drawable.ic_tag_flashsale;
+                    background = R.drawable.bg_product_tag_flashsale;
+                    foreground = R.color.tag_flashsale_foreground;
+                    break;
+                case "bestseller":
+                    label = "Bán chạy";
+                    icon = R.drawable.ic_tag_bestseller;
+                    background = R.drawable.bg_product_tag_bestseller;
+                    foreground = R.color.tag_bestseller_foreground;
+                    break;
+                case "new":
+                    label = "Mới";
+                    icon = R.drawable.ic_tag_new;
+                    background = R.drawable.bg_product_tag_new;
+                    foreground = R.color.tag_new_foreground;
+                    break;
+                default:
+                    tag.setVisibility(View.GONE);
+                    return;
+            }
+            tag.setText(label);
+            tag.setBackgroundResource(background);
+            Drawable drawable = DrawableCompat.wrap(
+                    ContextCompat.getDrawable(context, icon)).mutate();
+            DrawableCompat.setTint(drawable, ContextCompat.getColor(context, foreground));
+            int iconSize = context.getResources()
+                    .getDimensionPixelSize(R.dimen.product_tag_icon_size);
+            drawable.setBounds(0, 0, iconSize, iconSize);
+            tag.setCompoundDrawables(drawable, null, null, null);
+            tag.setTextColor(ContextCompat.getColor(context, foreground));
+            tag.setVisibility(View.VISIBLE);
         }
     }
 }

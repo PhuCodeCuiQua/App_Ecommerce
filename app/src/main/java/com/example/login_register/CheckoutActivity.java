@@ -46,6 +46,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private final List<ImageView> paymentChecks = new ArrayList<>();
     private View topbar;
     private View bottomBar;
+    private View checkoutScroll;
     private LinearLayout itemsContainer;
     private LinearLayout priceProductsContainer;
     private LinearLayout shippingContainer;
@@ -87,6 +88,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private void initViews() {
         topbar = findViewById(R.id.topbarSimple);
         bottomBar = findViewById(R.id.checkoutBottomBar);
+        checkoutScroll = findViewById(R.id.checkoutScroll);
         topbarBasePadding = topbar.getPaddingTop();
         bottomBarBasePadding = bottomBar.getPaddingBottom();
         itemsContainer = findViewById(R.id.layoutCheckoutItems);
@@ -108,6 +110,9 @@ public class CheckoutActivity extends AppCompatActivity {
                 WindowCompat.getInsetsController(getWindow(), findViewById(R.id.main));
         controller.setAppearanceLightStatusBars(true);
         controller.setAppearanceLightNavigationBars(false);
+        bottomBar.addOnLayoutChangeListener((view, left, top, right, bottom,
+                                             oldLeft, oldTop, oldRight, oldBottom) ->
+                updateCheckoutScrollBottomPadding());
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (view, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             view.setPadding(systemBars.left, 0, systemBars.right, 0);
@@ -117,6 +122,17 @@ public class CheckoutActivity extends AppCompatActivity {
                     bottomBar.getPaddingRight(), bottomBarBasePadding + systemBars.bottom);
             return insets;
         });
+        checkoutScroll.post(this::updateCheckoutScrollBottomPadding);
+    }
+
+    private void updateCheckoutScrollBottomPadding() {
+        int bottomPadding = bottomBar.getVisibility() == View.VISIBLE
+                ? bottomBar.getHeight() : 0;
+        if (checkoutScroll.getPaddingBottom() != bottomPadding) {
+            checkoutScroll.setPadding(checkoutScroll.getPaddingLeft(),
+                    checkoutScroll.getPaddingTop(), checkoutScroll.getPaddingRight(),
+                    bottomPadding);
+        }
     }
 
     private void setupTopbar() {
@@ -437,8 +453,17 @@ public class CheckoutActivity extends AppCompatActivity {
                 return;
             }
             btnPay.setEnabled(false);
-            OrderRepository.saveOrder(this, createOrder(address), () -> {
+            Order order = createOrder(address);
+            OrderRepository.saveOrder(this, order, () -> {
                 btnPay.setEnabled(true);
+                String orderId = order.getId();
+                String shortId = orderId == null ? ""
+                        : orderId.substring(Math.max(0, orderId.length() - 6))
+                        .toUpperCase(java.util.Locale.ROOT);
+                NotificationRepository.add("Đặt hàng thành công",
+                        "Đơn #" + shortId + " trị giá "
+                                + PriceFormatter.format(order.getTotal())
+                                + " đã được thanh toán.", "order");
                 showOrderSuccess();
             }, () -> {
                 btnPay.setEnabled(true);

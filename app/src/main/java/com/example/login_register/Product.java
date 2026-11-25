@@ -21,12 +21,13 @@ public class Product implements Serializable {
     private final double ratingAverage;
     private final int ratingCount;
     private final int soldCount;
+    private final List<String> tags;
 
     public Product(String id, String name, String type, String gender, String collection,
                    double originalPrice, int discountPercent, String description,
                    String material, String designer, String features, List<Integer> sizes,
                    List<ProductColor> colors, double ratingAverage, int ratingCount,
-                   int soldCount) {
+                   int soldCount, List<String> tags) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -43,6 +44,7 @@ public class Product implements Serializable {
         this.ratingAverage = ratingAverage;
         this.ratingCount = ratingCount;
         this.soldCount = soldCount;
+        this.tags = tags == null ? new ArrayList<>() : new ArrayList<>(tags);
     }
 
     public String getId() {
@@ -115,6 +117,23 @@ public class Product implements Serializable {
 
     public int getSoldCount() {
         return soldCount;
+    }
+
+    public List<String> getTags() {
+        return new ArrayList<>(tags);
+    }
+
+    public String getPrimaryTag() {
+        if (tags.contains("flashsale")) {
+            return "flashsale";
+        }
+        if (tags.contains("bestseller")) {
+            return "bestseller";
+        }
+        if (tags.contains("new")) {
+            return "new";
+        }
+        return null;
     }
 
     public int getImageResId() {

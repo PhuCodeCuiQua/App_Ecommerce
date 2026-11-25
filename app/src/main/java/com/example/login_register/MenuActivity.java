@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,19 +22,14 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 public class MenuActivity extends AppCompatActivity {
-    private LinearLayout main;
+    private FrameLayout main;
     private LinearLayout header;
     private LinearLayout body;
     private LinearLayout menuItems;
+    private ScrollView menuScroll;
+    private View bottomNav;
     private TextView tvUsername;
     private MaterialButton btnEditProfile;
-    private int headerPaddingStart;
-    private int headerPaddingTop;
-    private int headerPaddingEnd;
-    private int bodyPaddingStart;
-    private int bodyPaddingTop;
-    private int bodyPaddingEnd;
-    private int bodyPaddingBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,48 +37,64 @@ public class MenuActivity extends AppCompatActivity {
         WindowCompat.enableEdgeToEdge(getWindow());
         setContentView(R.layout.activity_menu);
         initViews();
+        setupBodyPosition();
         setupInsets();
         setupBackButton();
         setupProfile();
         setupMenuItems();
+        setupBottomNav();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         showUsername();
+        BottomNav.refreshBadges(this);
     }
 
     private void initViews() {
         main = findViewById(R.id.main);
         header = findViewById(R.id.menuHeader);
         body = findViewById(R.id.menuBody);
+        menuScroll = findViewById(R.id.menuScroll);
         menuItems = findViewById(R.id.menuItems);
         tvUsername = findViewById(R.id.tvMenuUsername);
         btnEditProfile = findViewById(R.id.btnEditProfile);
+        bottomNav = findViewById(R.id.bottomNav);
     }
 
     private void setupInsets() {
-        headerPaddingStart = header.getPaddingStart();
-        headerPaddingTop = header.getPaddingTop();
-        headerPaddingEnd = header.getPaddingEnd();
-        bodyPaddingStart = body.getPaddingStart();
-        bodyPaddingTop = body.getPaddingTop();
-        bodyPaddingEnd = body.getPaddingEnd();
-        bodyPaddingBottom = body.getPaddingBottom();
-        WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView())
-                .setAppearanceLightStatusBars(false);
-        WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView())
-                .setAppearanceLightNavigationBars(true);
-        ViewCompat.setOnApplyWindowInsetsListener(main, (view, windowInsets) -> {
-            Insets systemBars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
-            header.setPaddingRelative(headerPaddingStart + systemBars.left,
-                    headerPaddingTop + systemBars.top, headerPaddingEnd + systemBars.right,
-                    header.getPaddingBottom());
-            body.setPaddingRelative(bodyPaddingStart + systemBars.left, bodyPaddingTop,
-                    bodyPaddingEnd + systemBars.right, bodyPaddingBottom + systemBars.bottom);
+        BottomNav.applyInsets(this, main, header, bottomNav);
+        WindowCompat.getInsetsController(getWindow(), main).setAppearanceLightStatusBars(false);
+        int baseScrollPaddingBottom = menuScroll.getPaddingBottom();
+        ViewCompat.setOnApplyWindowInsetsListener(menuScroll, (view, windowInsets) -> {
+            Insets navigationBars = windowInsets.getInsets(
+                    WindowInsetsCompat.Type.navigationBars());
+            menuScroll.setPadding(menuScroll.getPaddingLeft(), menuScroll.getPaddingTop(),
+                    menuScroll.getPaddingRight(), baseScrollPaddingBottom + navigationBars.bottom);
             return windowInsets;
         });
+    }
+
+    private void setupBodyPosition() {
+        header.addOnLayoutChangeListener((view, left, top, right, bottom,
+                                         oldLeft, oldTop, oldRight, oldBottom) ->
+                positionMenuBody(bottom));
+        header.post(() -> positionMenuBody(header.getBottom()));
+    }
+
+    private void positionMenuBody(int headerBottom) {
+        if (headerBottom <= 0) {
+            return;
+        }
+        FrameLayout.LayoutParams params =
+                (FrameLayout.LayoutParams) body.getLayoutParams();
+        int topMargin = headerBottom
+                + getResources().getDimensionPixelSize(R.dimen.menu_body_overlap);
+        if (params.topMargin != topMargin) {
+            params.topMargin = topMargin;
+            body.setLayoutParams(params);
+        }
     }
 
     private void setupProfile() {
@@ -96,7 +109,12 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void setupBackButton() {
-        findViewById(R.id.btnBack).setOnClickListener(view -> finish());
+        findViewById(R.id.btnBack).setVisibility(View.GONE);
+    }
+
+    private void setupBottomNav() {
+        BottomNav.setup(this, BottomNav.ACCOUNT);
+        BottomNav.handleBack(this);
     }
 
     private void setupMenuItems() {

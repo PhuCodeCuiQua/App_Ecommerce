@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="@dimen/product_tag_icon_size"
+    android:height="@dimen/product_tag_icon_size"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/tag_bestseller_foreground"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="2"
+        android:pathData="M12,22c4,0 7,-3 7,-7 0,-3 -2,-5 -4,-7 0,3 -2,4 -3,4 1,-4 -1,-8 -4,-10 0,4 -1,7 -3,10 -2,4 0,10 7,10z" />
+</vector>

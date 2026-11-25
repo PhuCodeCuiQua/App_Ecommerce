@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottomNav"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/footer_height"
+    android:background="@drawable/bg_bottom_nav"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:elevation="@dimen/bottom_nav_elevation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/footer_height"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/navHome"
+            style="@style/Widget.App.BottomNav.Item">
+            <LinearLayout style="@style/Widget.App.BottomNav.Content">
+                <ImageView
+                    android:id="@+id/navHomeIcon"
+                    style="@style/Widget.App.BottomNav.Icon"
+                    android:src="@drawable/nav_home_selector" />
+                <TextView
+                    android:id="@+id/tvNavHomeLabel"
+                    style="@style/Widget.App.BottomNav.Label"
+                    android:text="Trang chủ" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/navCategories"
+            style="@style/Widget.App.BottomNav.Item">
+            <LinearLayout style="@style/Widget.App.BottomNav.Content">
+                <ImageView
+                    android:id="@+id/navCategoriesIcon"
+                    style="@style/Widget.App.BottomNav.Icon"
+                    android:src="@drawable/nav_grid_selector" />
+                <TextView
+                    android:id="@+id/tvNavCategoriesLabel"
+                    style="@style/Widget.App.BottomNav.Label"
+                    android:text="Danh mục" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/navNotifications"
+            style="@style/Widget.App.BottomNav.Item">
+            <LinearLayout style="@style/Widget.App.BottomNav.Content">
+                <ImageView
+                    android:id="@+id/navNotificationsIcon"
+                    style="@style/Widget.App.BottomNav.Icon"
+                    android:src="@drawable/nav_bell_selector" />
+                <TextView
+                    android:id="@+id/tvNavNotificationsLabel"
+                    style="@style/Widget.App.BottomNav.Label"
+                    android:text="Thông báo" />
+            </LinearLayout>
+            <View
+                android:id="@+id/viewNavNotifDot"
+                android:layout_width="@dimen/nav_dot_size"
+                android:layout_height="@dimen/nav_dot_size"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginStart="@dimen/nav_badge_offset"
+                android:background="@drawable/bg_nav_badge"
+                android:elevation="@dimen/nav_badge_elevation"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/navAccount"
+            style="@style/Widget.App.BottomNav.Item">
+            <LinearLayout style="@style/Widget.App.BottomNav.Content">
+                <ImageView
+                    android:id="@+id/navAccountIcon"
+                    style="@style/Widget.App.BottomNav.Icon"
+                    android:src="@drawable/nav_person_selector" />
+                <TextView
+                    android:id="@+id/tvNavAccountLabel"
+                    style="@style/Widget.App.BottomNav.Label"
+                    android:text="Tài khoản" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

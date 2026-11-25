@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/section_spacing"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/screen_margin"
+        android:paddingEnd="@dimen/screen_margin">
+
+        <View
+            android:layout_width="@dimen/section_accent_width"
+            android:layout_height="@dimen/section_accent_height"
+            android:background="@drawable/bg_section_accent" />
+
+        <TextView
+            android:id="@+id/tvSectionTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_8"
+            android:layout_weight="1"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
+            android:textColor="@color/tile_text"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSeeAll"
+            style="@style/Widget.App.Button.Pill"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/touch_target"
+            android:minWidth="0dp"
+            android:text="Xem tất cả  ›"
+            android:textAppearance="@style/TextAppearance.App.SectionButton"
+            app:backgroundTint="@color/md_surface"
+            app:strokeColor="@color/md_outline"
+            app:strokeWidth="@dimen/card_stroke_width" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSectionProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:nestedScrollingEnabled="false"
+        android:paddingStart="@dimen/space_10"
+        android:paddingEnd="@dimen/space_10" />
+</LinearLayout>
