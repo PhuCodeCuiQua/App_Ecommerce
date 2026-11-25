@@ -30,7 +30,7 @@
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.Small</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.Medium</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.App.Large</item>
-        <item name="android:fontFamily">sans</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:statusBarColor">@color/md_background</item>
         <item name="android:windowLightStatusBar">@bool/light_status_bar</item>
         <item name="android:windowBackground">@color/md_background</item>
