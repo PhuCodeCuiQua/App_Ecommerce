@@ -28,7 +28,7 @@
                 android:layout_height="56dp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_cart"
-                android:tint="?attr/colorOnPrimary" />
+                app:tint="?attr/colorOnPrimary" />
 
             <TextView
                 android:id="@+id/tvRegisterTitle"
@@ -44,11 +44,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:alpha="0.85"
                 android:gravity="center"
                 android:text="Tạo tài khoản để bắt đầu mua sắm"
                 android:textAppearance="?attr/textAppearanceBodyMedium"
-                android:textColor="?attr/colorOnPrimary"
-                android:alpha="0.85" />
+                android:textColor="?attr/colorOnPrimary" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:textAppearance="?attr/textAppearanceBodyLarge" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textAppearance="?attr/textAppearanceBodyLarge" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textAppearance="?attr/textAppearanceBodyLarge" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,5 +122,36 @@
             android:layout_marginTop="@dimen/space_24"
             android:layout_marginEnd="@dimen/screen_margin"
             android:text="Đăng ký" />
+
+        <LinearLayout
+            android:id="@+id/layoutBackToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_24"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/space_8">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đã có tài khoản? "
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+            <TextView
+                android:id="@+id/tvBackToLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đăng nhập"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>
