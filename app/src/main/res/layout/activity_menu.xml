@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/panel_dark"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/menuHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/panel_dark"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/screen_margin"
+        android:paddingTop="@dimen/space_8"
+        android:paddingEnd="@dimen/screen_margin"
+        android:paddingBottom="@dimen/menu_header_bottom_padding">
+
+        <FrameLayout
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/touch_target"
+            android:layout_height="@dimen/touch_target"
+            android:layout_marginBottom="@dimen/space_12"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="Quay lại"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="@dimen/menu_back_icon_size"
+                android:layout_height="@dimen/menu_back_icon_size"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_floating_button"
+                android:elevation="@dimen/card_elevation"
+                android:padding="@dimen/space_12"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@color/black" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/profileHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/space_8"
+            android:paddingEnd="@dimen/space_8">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="@dimen/menu_avatar_size"
+                android:layout_height="@dimen/menu_avatar_size"
+                android:background="@color/menu_avatar_background"
+                android:contentDescription="Ảnh hồ sơ"
+                android:padding="@dimen/space_16"
+                android:src="@drawable/ic_person"
+                android:tint="@color/white"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Avatar" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_12"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMenuUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Việt Nam"
+                    android:textAppearance="?attr/textAppearanceBodySmall"
+                    android:textColor="@color/menu_text_secondary" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditProfile"
+                style="@style/Widget.App.Button.Pill.Dark"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/touch_target"
+                android:minWidth="@dimen/touch_target"
+                android:text="SỬA"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="@color/black"
+                app:backgroundTint="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menuBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/menu_body_overlap"
+        android:layout_weight="1"
+        android:background="@drawable/bg_menu_body"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/menu_body_top_padding">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/screen_margin"
+                android:paddingEnd="@dimen/screen_margin"
+                android:paddingBottom="@dimen/space_24">
+
+                <LinearLayout
+                    android:id="@+id/menuItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_8"
+                    android:orientation="vertical" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

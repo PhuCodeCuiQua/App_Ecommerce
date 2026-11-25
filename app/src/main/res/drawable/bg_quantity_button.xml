@@ -1,0 +1,9 @@
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:inset="6dp">
+    <shape android:shape="oval">
+        <solid android:color="?attr/colorSurface" />
+        <stroke
+            android:width="@dimen/card_stroke_width"
+            android:color="?attr/colorOutline" />
+    </shape>
+</inset>

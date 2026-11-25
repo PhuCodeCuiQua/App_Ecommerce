@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topbarHome"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/home_topbar_height"
+    android:paddingStart="@dimen/space_8"
+    android:paddingEnd="@dimen/space_8">
+
+    <ImageButton
+        android:id="@+id/btnMenu"
+        android:layout_width="@dimen/touch_target"
+        android:layout_height="@dimen/touch_target"
+        android:layout_gravity="start|center_vertical"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Mở menu hồ sơ"
+        android:padding="@dimen/space_12"
+        android:src="@drawable/ic_menu"
+        android:tint="?attr/colorOnSurface" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/home_logo_height"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:contentDescription="Logo cửa hàng"
+        android:maxWidth="@dimen/home_logo_max_width"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_brand_placeholder" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btnSearch"
+            android:layout_width="@dimen/touch_target"
+            android:layout_height="@dimen/touch_target"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Tìm kiếm và lọc sản phẩm"
+            android:padding="@dimen/space_12"
+            android:src="@drawable/ic_search"
+            android:tint="?attr/colorOnSurface" />
+
+        <FrameLayout
+            android:layout_width="@dimen/touch_target"
+            android:layout_height="@dimen/touch_target">
+
+            <ImageButton
+                android:id="@+id/btnCart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Mở giỏ hàng"
+                android:padding="@dimen/space_12"
+                android:src="@drawable/ic_cart"
+                android:tint="?attr/colorOnSurface" />
+
+            <TextView
+                android:id="@+id/tvCartBadge"
+                style="@style/TextAppearance.Material3.LabelSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/cart_badge_size"
+                android:layout_gravity="end|top"
+                android:background="@drawable/bg_cart_badge"
+                android:gravity="center"
+                android:minWidth="@dimen/cart_badge_size"
+                android:paddingStart="@dimen/space_2"
+                android:paddingEnd="@dimen/space_2"
+                android:visibility="gone"
+                android:textColor="@color/black" />
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

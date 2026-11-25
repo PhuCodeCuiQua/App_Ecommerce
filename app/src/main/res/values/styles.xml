@@ -1,0 +1,104 @@
+<resources>
+    <style name="Widget.App.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">?attr/colorSurface</item>
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="strokeColor">?attr/colorOutlineVariant</item>
+        <item name="strokeWidth">@dimen/card_stroke_width</item>
+    </style>
+
+    <style name="Widget.App.Card.Product" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/product_tile</item>
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="cornerRadius">@dimen/radius_large</item>
+        <item name="android:textAppearance">?attr/textAppearanceLabelLarge</item>
+    </style>
+
+    <style name="Widget.App.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="backgroundTint">@color/md_primary</item>
+        <item name="android:textColor">@color/md_onPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">@dimen/radius_primary_button</item>
+    </style>
+
+    <style name="Widget.App.Button.BuyNow" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/detail_buy_button_height</item>
+        <item name="backgroundTint">@color/bottom_bar_black</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+    </style>
+
+    <style name="Widget.App.Button.Pill" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/touch_target</item>
+        <item name="backgroundTint">@color/chip_size_background_unselected</item>
+        <item name="android:textColor">@color/md_onSurface</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+    </style>
+
+    <style name="Widget.App.Button.Pill.Dark" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/touch_target</item>
+        <item name="backgroundTint">@color/panel_dark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">@dimen/radius_pill</item>
+    </style>
+
+    <style name="Widget.App.Chip.Size" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_size_background</item>
+        <item name="android:textColor">@color/chip_size_text</item>
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="android:minHeight">@dimen/touch_target</item>
+    </style>
+
+    <style name="Widget.App.TextField" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">@dimen/field_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/field_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/field_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/field_radius</item>
+    </style>
+
+    <style name="Widget.App.SearchField" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopStart">@dimen/radius_large</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_large</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_large</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_large</item>
+        <item name="boxBackgroundColor">?attr/colorSurfaceVariant</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+
+    <style name="Widget.App.SearchField.Dark" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopStart">@dimen/field_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/field_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/field_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/field_radius</item>
+        <item name="boxBackgroundColor">@color/panel_surface</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintTextColor">@color/panel_text_secondary</item>
+        <item name="startIconTint">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.App.FooterLabel" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.FooterIcon" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="TextAppearance.App.Checkout.TitleSmall"
+        parent="TextAppearance.Material3.TitleSmall" />
+    <style name="TextAppearance.App.Checkout.BodyMedium"
+        parent="TextAppearance.Material3.BodyMedium" />
+    <style name="TextAppearance.App.Checkout.BodySmall"
+        parent="TextAppearance.Material3.BodySmall" />
+</resources>
